@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TheDice v-for="i in dices.length" :key="i" :dice="dices[i]" @throwdice="newRandomDice(i)"></TheDice>
+    <TheDice v-for="(dice, i) in dices" :key="i" :dice="dice" @throwdice="newRandomDice(i)"></TheDice>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
       return Math.floor(Math.random() * (max - min)) + min
     },
     newRandomDice (i) {
-      console.log('test')
+      this.$set(this.dices, i, this.getRandomDice())
     }
   }
 }

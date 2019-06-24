@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Dice',
+  name: 'TheDice',
   props: {
     dice: {
       type: Number,
