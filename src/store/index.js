@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import dices from './dices'
+import game from './game'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules: { dices }
+  modules: { game }
 })

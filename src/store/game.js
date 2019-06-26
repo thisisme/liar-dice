@@ -6,16 +6,42 @@ export default {
   namespaced: true,
   // ----------------------------------------------------------------------------------
   state: {
+    players: [
+      {
+        'name': 'Mats'
+      },
+      {
+        'name': 'Janne'
+      },
+      {
+        'name': 'Martin'
+      }
+    ],
+    currentPlayer: 0,
+    turn: 0,
     dices: []
   },
   // ----------------------------------------------------------------------------------
   getters: {
-    dices: state => state.dices
+    player: state => index => { return state.players[index] },
+    players: state => state.players,
+    currentPlayer: state => state.currentPlayer,
+    dices: state => state.dices,
+    turn: state => state.turn
   },
   // ----------------------------------------------------------------------------------
   mutations: {
+    addPlayer: (state, player) => {
+      Vue.set(state, 'players', [...state.players, player])
+    },
+    setCurrentPlayer: (state, player) => {
+      Vue.set(state, 'currentPlayer', player)
+    },
     setDices: (state, dices) => {
       Vue.set(state, 'dices', dices)
+    },
+    turn: (state, turn) => {
+      Vue.set(state, 'turn', state.turn + 1)
     }
   },
   // ----------------------------------------------------------------------------------
