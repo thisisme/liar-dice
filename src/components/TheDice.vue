@@ -18,22 +18,22 @@ export default {
   methods: {
     getDiceFace (dice) {
       switch (dice) {
-        case 9: {
+        case 1: {
           return 'nine'
         }
-        case 10: {
+        case 2: {
           return 'ten'
         }
-        case 11: {
+        case 3: {
           return 'jack'
         }
-        case 12: {
+        case 4: {
           return 'queen'
         }
-        case 13: {
+        case 5: {
           return 'king'
         }
-        case 14: {
+        case 6: {
           return 'ace'
         }
       }

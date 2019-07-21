@@ -26,7 +26,7 @@ export default {
       return this.$store.getters['game/turn']
     },
     getCurrentPlayerName () {
-      return this.$store.getters['game/player'](this.$store.getters['game/currentPlayer']).name
+      return this.$store.getters['game/player'](this.currentPlayer).name
     },
     next () {
       let currentPlayer = this.currentPlayer + 1

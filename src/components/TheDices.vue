@@ -6,6 +6,7 @@
 
 <script>
 import TheDice from './TheDice.vue'
+import { checkIfBetter } from '@/core/game.js'
 
 export default {
   name: 'TheDices',
@@ -24,12 +25,13 @@ export default {
   },
   methods: {
     getRandomDice () {
-      const min = Math.ceil(9)
-      const max = Math.floor(14)
+      const min = Math.ceil(1)
+      const max = Math.floor(6)
       return Math.floor(Math.random() * (max - min)) + min
     },
     newRandomDice (i) {
       this.$set(this.dices, i, this.getRandomDice())
+      checkIfBetter(this.dices)
     }
   },
   watch: {
