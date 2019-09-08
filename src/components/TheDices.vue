@@ -39,17 +39,24 @@ export default {
       this.clickedDices.push(i)
       this.parentDices = this.dices
       this.$set(this.dices, i, this.getRandomDice())
+    },
+    setPlayerHand () {
+      this.$store.commit('game/setPlayerHand', { player: this.currentPlayer, hand: this.dices })
     }
   },
   watch: {
     currentPlayer (newPlayer, oldPlayer) {
       console.log(this.$store.getters['game/player'](newPlayer).name)
       // console.log(`going from ${this.$store.getters['game/player'](oldPlayer)} to ${this.$store.getters['game/player'](newPlayer)}`)
+      // Reset clickedDices
+      this.clickedDices = []
+      this.setPlayerHand()
     },
     dices (newDices) {
       console.log(this.parentDices)
       console.log(newDices)
       checkIfBetter(this.dices)
+      this.setPlayerHand()
     }
   }
 }

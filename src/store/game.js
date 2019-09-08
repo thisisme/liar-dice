@@ -8,13 +8,16 @@ export default {
   state: {
     players: [
       {
-        'name': 'Mats'
+        'name': 'Mats',
+        'hand': []
       },
       {
-        'name': 'Janne'
+        'name': 'Janne',
+        'hand': []
       },
       {
-        'name': 'Martin'
+        'name': 'Martin',
+        'hand': []
       }
     ],
     currentPlayer: 0,
@@ -24,6 +27,7 @@ export default {
   // ----------------------------------------------------------------------------------
   getters: {
     player: state => index => { return state.players[index] },
+    playerHand: state => index => { return state.players[index].hand },
     players: state => state.players,
     currentPlayer: state => state.currentPlayer,
     dices: state => state.dices,
@@ -36,6 +40,9 @@ export default {
     },
     setCurrentPlayer: (state, player) => {
       Vue.set(state, 'currentPlayer', player)
+    },
+    setPlayerHand: (state, payload) => {
+      state.players[payload.player].hand = payload.hand
     },
     setDices: (state, dices) => {
       Vue.set(state, 'dices', dices)

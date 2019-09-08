@@ -1,11 +1,14 @@
 export function checkIfBetter (hand) {
   const handType = checkType(hand)
+
+  console.log(handType)
 }
 
 function checkType (hand) {
   // hand = sortDices(hand)
   hand = findDuplicates(hand)
-  console.log(findTypeOfHand(hand))
+  
+  return findTypeOfHand(hand)
 }
 
 function sortNumbers (arr) {
@@ -18,13 +21,7 @@ function findDuplicates (hand) {
       [b]: (a[b] || 0) + 1
     }), {})
 
-  // const duplicates = dices =>
-  //   Object.keys(dices).filter((a) => dices[a] > 1)
-
   return count(hand)
-  // console.log(fixed)
-  // console.log(Object.keys(fixed).length)
-  // console.log(duplicates(count(hand)))
 }
 
 function findTypeOfHand (hand) {
@@ -36,7 +33,6 @@ function findTypeOfHand (hand) {
       break
     case 2:
       str = 'Four of a kind'
-      console.log(hand)
       if (hand[handKeys[0]] === 3 || hand[handKeys[1]] === 3) {
         str = 'Full house'
       }
