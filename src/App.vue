@@ -1,30 +1,41 @@
 <template>
   <div id="app">
-    <TheDice v-for="i in dices.length" :key="i" :dice="dices[i]" @throwdice="newRandomDice(i)"></TheDice>
+    <h1>Turn {{ getTurn() }}</h1>
+    <h2>{{ getCurrentPlayerName() }} is playing</h2>
+    <button @click="next()" class="btn">Next person</button>
+    <button @click="newRound()" class="btn">New round</button>
+    <TheDices :currentPlayer="currentPlayer" />
   </div>
 </template>
 
 <script>
-import TheDice from './components/TheDice.vue'
+import TheDices from './components/TheDices'
 
 export default {
   name: 'app',
   components: {
-    TheDice
+    TheDices
   },
   data () {
     return {
-      dices: Array.from({ length: 5 }, () => this.getRandomDice())
+      currentPlayer: 0
     }
   },
   methods: {
-    getRandomDice () {
-      const min = Math.ceil(9)
-      const max = Math.floor(14)
-      return Math.floor(Math.random() * (max - min)) + min
+    getTurn () {
+      return this.$store.getters['game/turn']
     },
-    newRandomDice (i) {
-      console.log('test')
+    getCurrentPlayerName () {
+      return this.$store.getters['game/player'](this.currentPlayer).name
+    },
+    next () {
+      let currentPlayer = this.currentPlayer + 1
+      if (currentPlayer === this.$store.getters['game/players'].length) {
+        currentPlayer = 0
+        this.$store.commit('game/turn')
+      }
+      this.$store.commit('game/setCurrentPlayer', { currentPlayer })
+      this.currentPlayer = currentPlayer
     }
   }
 }
@@ -38,7 +49,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
+}
+.btn {
+  padding: 0.5rem;
+  text-transform: uppercase;
+  background-color: purple;
+  color: white;
+  margin: 1rem;
+  border: none;
 }
 </style>
